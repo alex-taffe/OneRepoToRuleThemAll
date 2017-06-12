@@ -1,19 +1,17 @@
 import { connect } from 'react-redux';
-
 import EventPanels from 'components/gtv/EventPanels';
+import { getAllEvents } from 'actions/events';
 
-function sliceEvents(events) {
-  return [
-    events.slice(0, 4),
-    events.slice(4, 8),
-    events.slice(8, 12),
-  ];
-}
-
-function mapStateToProps(store) {
+function mapStateToProps({ events }) {
   return {
-    events: sliceEvents(store.events.all),
+    events: events.all,
   };
 }
 
-export default connect(mapStateToProps)(EventPanels);
+function mapDispatchToProps(dispatch) {
+  return {
+    getEvents: () => dispatch(getAllEvents()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventPanels);

@@ -28,32 +28,30 @@ class EventPanelsEvent extends Component {
   )
 
   render() {
-    if (this.isOneDay()) {
-      return (
-        <div>
-          <div className="gtv-event-data">
-            <span>{ this.fullStartDay() }</span>
-          </div>
-          <div className="gtv-event-data">
-            <span>{ this.timeRange() }</span>
-          </div>
-          <div className="gtv-event-data faded">
-            <span>{ this.props.event.location }</span>
-          </div>
-        </div>
-      );
-    }
     return (
-      <div>
-        <div className="gtv-event-data">
-          <span>{ this.startDay() } to</span>
-        </div>
-        <div className="gtv-event-data">
-          <span>{ this.endDay() }</span>
-        </div>
-        <div className="gtv-event-data faded">
-          <span>{ this.props.event.location }</span>
-        </div>
+      <div className="gtv-event">
+        <h3 className="gtv-event-title">{this.props.event.name}</h3>
+        {
+          /* eslint-disable semi */
+          /* eslint-disable no-unused-expressions */
+          do {
+            if (this.isOneDay()) {
+              [
+                <span key={1} className="gtv-event-data">{this.fullStartDay()}</span>,
+                <span key={2} className="gtv-event-data">{this.timeRange()}</span>,
+                <span key={3} className="gtv-event-data text-muted">{this.props.event.location}</span>,
+              ]
+            } else {
+              [
+                <span key={1} className="gtv-event-data">{this.startDay()} to</span>,
+                <span key={2} className="gtv-event-data">{this.endDay()}</span>,
+                <span key={3} className="gtv-event-data text-muted">{this.props.event.location}</span>,
+              ]
+            }
+          }
+          /* eslint-enable no-unused-expressions */
+          /* eslint-enable semi */
+        }
       </div>
     );
   }
